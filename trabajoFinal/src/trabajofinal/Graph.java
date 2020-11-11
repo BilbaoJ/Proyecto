@@ -15,6 +15,13 @@ import java.util.Queue;
 public class Graph {
 
     /**
+     * @return the aList
+     */
+    public LinkedList<Integer>[] getaList() {
+        return aList;
+    }
+
+    /**
      * @return the aMatrix
      */
     
@@ -40,7 +47,7 @@ public class Graph {
     public void addEdge(int source, int destination) {
         aMatrix[source][destination] = true;
         //aMatrix[destination][source] = true;//se habilita para un grafo sin dirección
-        aList[source].add(destination);
+        getaList()[source].add(destination);
     }
 
     public void deleteEdge(int source, int destination) throws Exception {
@@ -48,7 +55,7 @@ public class Graph {
             throw new Exception("No existe ese arco");
         } else {
             aMatrix[source][destination] = false;
-            aList[source].remove(destination);
+            getaList()[source].remove(destination);
         }
 
     }
@@ -74,7 +81,7 @@ public class Graph {
         String list = "";
         for (int i = 0; i < totalNodes; i++) {
             list += i + ": ";
-            for (Integer v : aList[i]) {
+            for (Integer v : getaList()[i]) {
                 list += v + " ";
             }
             list += "\n";
@@ -136,7 +143,7 @@ public class Graph {
         while (!queue.isEmpty()) {
             source = queue.poll();
             System.out.print(source + "");
-            for (Integer v : aList[source]) {
+            for (Integer v : getaList()[source]) {
                 if (!visited[v]) {
                     visited[v] = true;
                     queue.add(v);
@@ -153,7 +160,7 @@ public class Graph {
     private void DFS(int source, boolean visited[]) {
         visited[source] = true;
         System.out.print(source + "");
-        for (Integer v : aList[source]) {
+        for (Integer v : getaList()[source]) {
             if (!visited[v]) {
                 DFS(v, visited);//...
             }

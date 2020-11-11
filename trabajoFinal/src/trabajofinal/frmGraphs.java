@@ -27,6 +27,10 @@ import javax.swing.table.JTableHeader;
  */
 public class frmGraphs extends javax.swing.JFrame {
 
+    public Graphics g;
+    public Graph grafito;
+    public JsonObject nodos;
+    public JsonObject arcos;
     /**
      * Creates new form frmGraphs
      */
@@ -48,9 +52,15 @@ public class frmGraphs extends javax.swing.JFrame {
         panelGraph = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbMatriz = new javax.swing.JTable();
+        txaShow = new javax.swing.JTextArea();
+        btnListaArcos = new javax.swing.JButton();
+        btnListaA = new javax.swing.JButton();
+        btnMatriz = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtJson.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         btnLeer.setText("Leer y Generar");
         btnLeer.addActionListener(new java.awt.event.ActionListener() {
@@ -59,18 +69,18 @@ public class frmGraphs extends javax.swing.JFrame {
             }
         });
 
-        panelGraph.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        panelGraph.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 51, 255)));
         panelGraph.setPreferredSize(new java.awt.Dimension(640, 360));
 
         javax.swing.GroupLayout panelGraphLayout = new javax.swing.GroupLayout(panelGraph);
         panelGraph.setLayout(panelGraphLayout);
         panelGraphLayout.setHorizontalGroup(
             panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
         panelGraphLayout.setVerticalGroup(
             panelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGap(0, 356, Short.MAX_VALUE)
         );
 
         btnLimpiar.setText("Limpiar");
@@ -80,50 +90,94 @@ public class frmGraphs extends javax.swing.JFrame {
             }
         });
 
-        tbMatriz.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        txaShow.setEditable(false);
+        txaShow.setColumns(20);
+        txaShow.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txaShow.setForeground(new java.awt.Color(0, 0, 0));
+        txaShow.setRows(5);
+        txaShow.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 255, 0)));
+        txaShow.setMargin(new java.awt.Insets(25, 25, 25, 25));
+        txaShow.setSelectedTextColor(new java.awt.Color(153, 51, 255));
+        jScrollPane1.setViewportView(txaShow);
 
-            },
-            new String [] {
-
+        btnListaArcos.setText("Lista Arcos");
+        btnListaArcos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaArcosActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(tbMatriz);
+        });
+
+        btnListaA.setText("Lista Adyacencia ");
+        btnListaA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaAActionPerformed(evt);
+            }
+        });
+
+        btnMatriz.setText("Matriz Adyacencia ");
+        btnMatriz.setActionCommand("Matriz Adyacencia ");
+        btnMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMatrizActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(0, 255, 204));
+        jTextField1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 153, 153)));
+        jTextField1.setMargin(new java.awt.Insets(25, 0, 0, 0));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(panelGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(txtJson, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(btnLeer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtJson, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelGraph, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnLeer, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnListaA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(btnListaArcos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(txtJson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panelGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtJson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMatriz))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLeer)
+                    .addComponent(btnListaA))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
-                    .addComponent(btnLeer))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(btnListaArcos))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,19 +187,43 @@ public class frmGraphs extends javax.swing.JFrame {
         String json = txtJson.getText();
         JsonParser parser = new JsonParser();
         JsonObject gsonObj = parser.parse(json).getAsJsonObject();
-        JsonObject nodos = gsonObj.getAsJsonObject("vl");
-        JsonObject arcos = gsonObj.getAsJsonObject("el");
-        Graph grafito = new Graph(nodos.size());
+        nodos = gsonObj.getAsJsonObject("vl");
+        arcos = gsonObj.getAsJsonObject("el");
+        grafito = new Graph(nodos.size());
         
-        Graphics g = panelGraph.getGraphics();
+        g = panelGraph.getGraphics();
         drawEdges(g, arcos, nodos, grafito);
         drawNodes(g, nodos);
-        showMatrix(grafito, nodos.size(), g);
+               
     }//GEN-LAST:event_btnLeerActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         panelGraph.repaint();
+        txtJson.setText("");
+        txaShow.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnListaArcosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaArcosActionPerformed
+        // TODO add your handling code here:
+        jTextField1.setText("Lista Arcos");
+        txaShow.setText(showEdges(grafito, nodos.size(), g)); 
+    }//GEN-LAST:event_btnListaArcosActionPerformed
+
+    private void btnListaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAActionPerformed
+        // TODO add your handling code here:
+        jTextField1.setText("Lista Adyacencia");
+        txaShow.setText(showAList(grafito, nodos.size(), g)); 
+    }//GEN-LAST:event_btnListaAActionPerformed
+
+    private void btnMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatrizActionPerformed
+        // TODO add your handling code here:
+        jTextField1.setText("Matriz Adyacencia");
+        txaShow.setText(showMatrix(grafito, nodos.size(), g)); 
+    }//GEN-LAST:event_btnMatrizActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     public void drawEdges(Graphics g, JsonObject arcos, JsonObject nodos, Graph grafito) {
         //se hace un recorrido para guardar y dibujar los arcos
@@ -214,53 +292,65 @@ public class frmGraphs extends javax.swing.JFrame {
                 new int[]{0, -ARR_SIZE, ARR_SIZE, 0}, 4);
     }
     
-    public void showMatrix(Graph myGraph, int size, Graphics g){
-        
-        /*
-        DefaultTableModel model = (DefaultTableModel) tbMatriz.getModel();
-        model.setRowCount(size+1);
-        model.setColumnCount(size+1); 
+    public String showMatrix(Graph myGraph, int size, Graphics g){
+        String table = "        ";
         
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if(i == 0 && j == 0){
-                    
-                }else if(i == 0){
-                    
-                    tbMatriz.setValueAt(j, i, j);
-                }else if(j == 0){
-                    tbMatriz.setValueAt(i, i, j);
+            table += i + " ";
+        }
+        
+        table += "\n";
+        
+        for (int i = 0; i < size; i++) {
+            if(i < 10){
+                table += i + "   |  ";
+            }else{
+                table += i + " |  ";
+            }
+            
+            for (int j = 0; j < size; j++) {          
+                //table += myGraph.getaMatrix()[i][j];
+                if(myGraph.getaMatrix()[i][j]){
+                    table += 1;
                 }else{
-                    int value = myGraph.getaMatrix()[i][j] ? 1 : 0;
-                    tbMatriz.setValueAt(value, i, j);
-                }      
+                    table += 0;  
+                }               
+                if(j < 9){
+                    table += " ";
+                }else{
+                    table += "   ";
+                }
+            }
+            table += "| " + "\n";
+        }
+        
+        return table;
+    }
+    
+    public String showAList(Graph myGraph, int size, Graphics g) {
+        String list = "";
+        for (int i = 0; i < size; i++) {
+            list += i + ": ";
+            for (Integer v : myGraph.getaList()[i]) {
+                list += v + " ";
+            }
+            list += "\n";
+        }
+        return list;
+    }
+    
+    public String showEdges(Graph myGraph, int size, Graphics g){
+        String list = "";
+        int edges = 0;
+        for (int i = 0; i < size; i++) { 
+            for (int j = 0; j < size; j++) {
+                if(myGraph.getaMatrix()[i][j]){
+                    list += edges + ": " + i + " "+ j + "\n";
+                    edges++;
+                }
             }
         }
-        
-        
-        
-        String names[] = new String[size];
-        for (int i = 0; i < size; i++){
-            names[i] = String.valueOf(i);
-        }
-        Object matrix[][] = new Object[size][size];
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-             if(myGraph.getaMatrix()[i][j]){
-                 matrix[i][j] = 1;
-             }else{
-                 matrix[i][j] = 0;
-             }
-            }
-        }
-        
-        JTable tabla = new JTable(matrix, names);
-        
-        tbMatriz = tabla;
-        tbMatriz.setShowGrid (true);
-        tbMatriz.setVisible(true);
-        tbMatriz.printComponents(g);
-        */
+        return list;
     }
     /**
      * @param args the command line arguments
@@ -299,9 +389,13 @@ public class frmGraphs extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLeer;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnListaA;
+    private javax.swing.JButton btnListaArcos;
+    private javax.swing.JButton btnMatriz;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelGraph;
-    private javax.swing.JTable tbMatriz;
+    private javax.swing.JTextArea txaShow;
     private javax.swing.JTextField txtJson;
     // End of variables declaration//GEN-END:variables
 }
