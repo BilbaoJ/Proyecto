@@ -73,6 +73,7 @@ public class frmGraphs extends javax.swing.JFrame {
         });
 
         panelGraph.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 51, 255)));
+        panelGraph.setForeground(new java.awt.Color(255, 255, 255));
         panelGraph.setPreferredSize(new java.awt.Dimension(640, 360));
 
         javax.swing.GroupLayout panelGraphLayout = new javax.swing.GroupLayout(panelGraph);
@@ -103,6 +104,7 @@ public class frmGraphs extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txaShow);
 
         btnListaArcos.setText("Lista Arcos");
+        btnListaArcos.setEnabled(false);
         btnListaArcos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListaArcosActionPerformed(evt);
@@ -110,6 +112,7 @@ public class frmGraphs extends javax.swing.JFrame {
         });
 
         btnListaA.setText("Lista Adyacencia ");
+        btnListaA.setEnabled(false);
         btnListaA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListaAActionPerformed(evt);
@@ -117,6 +120,7 @@ public class frmGraphs extends javax.swing.JFrame {
         });
 
         btnMatriz.setText("Matriz Adyacencia ");
+        btnMatriz.setEnabled(false);
         btnMatriz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMatrizActionPerformed(evt);
@@ -124,7 +128,7 @@ public class frmGraphs extends javax.swing.JFrame {
         });
 
         jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(0, 255, 204));
+        jTextField1.setBackground(new java.awt.Color(153, 255, 255));
         jTextField1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 153, 153)));
         jTextField1.setMargin(new java.awt.Insets(25, 0, 0, 0));
@@ -162,34 +166,41 @@ public class frmGraphs extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(283, 283, 283)
-                        .addComponent(btnEliminarNodo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEliminarNodo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtJson)
-                            .addComponent(panelGraph, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnLeer, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelGraph, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+                            .addComponent(btnLeer, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(2, 2, 2)
-                                .addComponent(jSeparator2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(13, 13, 13)
                                 .addComponent(txtNodo)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnListaA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                            .addComponent(btnListaArcos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                    .addComponent(jTextField1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 1, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnListaArcos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnListaA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnMatriz, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -205,10 +216,11 @@ public class frmGraphs extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addComponent(btnMatriz)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnListaA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnListaA)
+                        .addGap(11, 11, 11)
                         .addComponent(btnListaArcos))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -217,9 +229,7 @@ public class frmGraphs extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtJson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLeer)
-                            .addComponent(btnLimpiar))
+                        .addComponent(btnLeer)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -231,8 +241,9 @@ public class frmGraphs extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnArbol)
-                    .addComponent(btnEliminarNodo))
-                .addContainerGap(13, Short.MAX_VALUE))
+                    .addComponent(btnEliminarNodo)
+                    .addComponent(btnLimpiar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,6 +270,8 @@ public class frmGraphs extends javax.swing.JFrame {
         g = panelGraph.getGraphics();
         drawEdges(g, arcos, nodos, grafito);
         drawNodes(g, nodos);
+        
+        Mostrar(true);
 
     }//GEN-LAST:event_btnLeerActionPerformed
 
@@ -268,6 +281,7 @@ public class frmGraphs extends javax.swing.JFrame {
         txaShow.setText("");
         txtArbol.setText("");
         txtNodo.setText("");
+        Mostrar(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnListaArcosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaArcosActionPerformed
@@ -293,10 +307,10 @@ public class frmGraphs extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArbolActionPerformed
-        try {
+            try {
             String valores = txtArbol.getText();
             nodosArbol = valores.split(",");
-            if (nodosArbol.length > 9) {
+            if (nodosArbol.length > 100) {
                 throw new Exception("Ingrese máximo 9 nodos");
             } else {
                 arbolito = new BinarySearchTree();
@@ -304,8 +318,8 @@ public class frmGraphs extends javax.swing.JFrame {
                     arbolito.add(Integer.parseInt(nodo));
                 }
                 g = panelGraph.getGraphics();
-                this.repaint();
-                drawTree(320, 30, arbolito, arbolito.getRoot());
+                drawTree(370, 30, arbolito, arbolito.getRoot());
+                //System.out.println();
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "No deje espacios en blanco y separe los numeros con coma");
@@ -316,61 +330,73 @@ public class frmGraphs extends javax.swing.JFrame {
     }//GEN-LAST:event_btnArbolActionPerformed
 
     private void btnEliminarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarNodoActionPerformed
-        
+
         int nodo = Integer.valueOf(txtNodo.getText());
-        if(arbolito.search(nodo) != null){
+        if (arbolito.search(nodo) != null) {
             arbolito.Delete(nodo);
             repaint();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "El nodo que quiere eliminar no existe");
         }
-        
+
     }//GEN-LAST:event_btnEliminarNodoActionPerformed
-    
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if(arbolito != null){
-            drawTree(320, 30, arbolito, arbolito.getRoot());
+        if (arbolito != null) {
+            drawTree(370, 30, arbolito, arbolito.getRoot());
         }
     }
-    
-    public int ancho = 50;
-    public int radio = 15;
 
-
-    public int getExtra(BinaryNode node){
-        if(node == arbolito.getRoot()){
-                return 140;
-            }else if(node.getLeft() != null && node.getRight() != null){
-                return 50;
-            }else if(node.hasOneChild()){
-                return -20;
+    public int LevelNodo(int lvl){
+        int a = 150;
+        for(int i = 0; i<Integer.MAX_VALUE; i++){  
+            if(i == lvl){
+                return a;
             }
-            else{
-                return 0;
-            }
+            a/=5;
+        }
+        return 0;
     }
+    
+    public void Mostrar(boolean mostrar){
+        btnMatriz.setEnabled(mostrar);
+        btnListaA.setEnabled(mostrar);
+        btnListaArcos.setEnabled(mostrar);
+    }
+    
+    
+    public int ancho = 40;
+    public int radio = 10;
+    
     public void drawTree(int x, int y, BinarySearchTree arbolito, BinaryNode node) {
         if (node == null) {
 
         } else {
-            
-            g.drawOval(x, y, 30, 30);
-            g.drawString(String.valueOf(node.getData()), x+radio, y+radio);
-            
+            System.out.println("nodo: " + node.getData());
+            System.out.println("nivel: " + arbolito.showLevel(node.getData()));
+            System.out.println("valor x: " + x);
+
+            int xd = LevelNodo(arbolito.showLevel(node.getData()));
+                    
+            g.setColor(Color.cyan);
+            g.fillOval(x, y, 30, 30);
+            g.setColor(Color.black);
+            g.drawString(String.valueOf(node.getData()), x + radio, y + radio);
+
             if (node.getLeft() != null) {
-                g.drawLine(x+radio, y+radio, x-ancho-getExtra(node)+radio, y + ancho + radio);
+                g.drawLine(x + radio, y + radio, x - ancho + radio - xd, y + ancho + radio);
             }
             if (node.getRight() != null) {
-                g.drawLine(x+radio, y+radio, x + ancho+getExtra(node) +radio, y + ancho + radio);
+                g.drawLine(x + radio, y + radio, x + ancho + radio + xd, y + ancho + radio);
             }
-            drawTree(x-ancho-getExtra(node)+radio, y+ancho, arbolito, node.getLeft());
-            drawTree(x+ancho+getExtra(node)+radio, y+ancho, arbolito, node.getRight());
+
+            drawTree(x - ancho - xd, y + ancho, arbolito, node.getLeft());
+            drawTree(x + ancho + xd, y + ancho, arbolito, node.getRight());
         }
         panelGraph.paintComponents(g);
     }
-    
 
     public void drawEdges(Graphics g, JsonObject arcos, JsonObject nodos, Graph grafito) {
         //se hace un recorrido para guardar y dibujar los arcos
@@ -401,7 +427,7 @@ public class frmGraphs extends javax.swing.JFrame {
 
             //g.drawLine(x1, y1, x2, y2);
             g.setColor(Color.BLACK);
-            g.drawString(weight, ((x1 + x2) / 2), ((y1 + y2) / 2));
+            g.drawString(weight, ((x1 + x2 - 5) / 2), ((y1 + y2 - 10)/ 2));
         }
     }
 
@@ -414,10 +440,10 @@ public class frmGraphs extends javax.swing.JFrame {
             int y = node.get("y").getAsInt();
 
             //Se dibuja el nodo con su "nombre"
-            g.setColor(Color.red);
+            g.setColor(Color.cyan);
             g.fillOval(x - 15, y - 15, 30, 30);
             g.setColor(Color.BLACK);
-            g.drawString(String.valueOf(i), x, y);
+            g.drawString(String.valueOf(i), x-3, y+5);
         }
     }
 
@@ -507,7 +533,7 @@ public class frmGraphs extends javax.swing.JFrame {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         */      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

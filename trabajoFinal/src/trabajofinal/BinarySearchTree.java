@@ -14,12 +14,12 @@ public class BinarySearchTree {
     /**
      * @return the nodes
      */
-
     private BinaryNode root;
     public BinaryNode father;
     private boolean fatherposition;
     private int nodes;
     private int leafs;
+    private int level;
 
     public BinarySearchTree() {
         root = null;
@@ -32,6 +32,7 @@ public class BinarySearchTree {
     }
 
     public BinaryNode search(int data) {
+        level = 0;
         return search(data, root);
     }
 
@@ -44,7 +45,7 @@ public class BinarySearchTree {
         }
 
         father = currentNode;
-
+        level++;
         if (data > currentNode.getData()) {
             fatherposition = true;
             return search(data, currentNode.getRight());
@@ -193,7 +194,7 @@ public class BinarySearchTree {
             InOrdenR(currentRoot.getLeft());
             System.out.print(currentRoot.getData() + "");
             InOrdenR(currentRoot.getRight());
-            
+
         }
     }
 
@@ -208,13 +209,33 @@ public class BinarySearchTree {
             System.out.print(currentRoot.getData() + "");
         }
     }
-    
+
     public int getNodes() {
         return nodes;
     }
 
     public BinaryNode getRoot() {
         return root;
+    }
+
+    public boolean isLevel1(int d) {
+        search(d);
+        if (father == root) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public int showLevel(int d){
+        if(d == root.getData()){
+            return 0;
+        }else{
+            search(d);
+            return level;
+        }
+            
+        
     }
 
 }
