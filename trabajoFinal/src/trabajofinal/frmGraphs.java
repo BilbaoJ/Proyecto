@@ -310,7 +310,7 @@ public class frmGraphs extends javax.swing.JFrame {
             try {
             String valores = txtArbol.getText();
             nodosArbol = valores.split(",");
-            if (nodosArbol.length > 100) {
+            if (nodosArbol.length > 9) {
                 throw new Exception("Ingrese máximo 9 nodos");
             } else {
                 arbolito = new BinarySearchTree();
